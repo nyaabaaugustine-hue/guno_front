@@ -1,0 +1,103 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 255 255 255;
+    --foreground: 15 23 42;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-white text-dark-900 antialiased;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  ::selection {
+    @apply bg-juno-green/30 text-dark-900;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg font-semibold text-base transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-primary {
+    @apply btn bg-juno-dark-green text-white hover:bg-juno-mid-green focus-visible:ring-juno-green shadow-sm;
+  }
+
+  .btn-secondary {
+    @apply btn bg-white text-juno-dark-green border-2 border-juno-dark-green hover:bg-juno-light-green/50 focus-visible:ring-juno-green;
+  }
+
+  .btn-lg {
+    @apply px-8 py-4 text-lg;
+  }
+
+  .section {
+    @apply py-16 md:py-24 lg:py-32 px-6 md:px-12;
+  }
+
+  .container {
+    @apply max-w-7xl mx-auto;
+  }
+
+  .heading-1 {
+    @apply text-4xl md:text-5xl lg:text-6xl font-display font-bold -tracking-[0.03em] leading-[1.1] text-balance;
+  }
+
+  .heading-2 {
+    @apply text-3xl md:text-4xl lg:text-5xl font-display font-bold -tracking-[0.025em] leading-[1.15] text-balance;
+  }
+
+  .heading-3 {
+    @apply text-2xl md:text-3xl font-display font-bold -tracking-[0.02em] leading-[1.2] text-balance;
+  }
+
+  .text-body {
+    @apply text-base md:text-lg text-dark-700 leading-relaxed max-w-prose;
+  }
+
+  .text-muted {
+    @apply text-dark-400 text-sm;
+  }
+
+  .card {
+    @apply bg-white rounded-xl border border-dark-100 transition-shadow duration-300;
+  }
+
+  .card-hover {
+    @apply card hover:shadow-md hover:border-dark-200;
+  }
+
+  .input {
+    @apply w-full px-4 py-3 rounded-lg border-2 border-dark-200 bg-white text-dark-900 placeholder-dark-400 focus:outline-none focus:ring-2 focus:ring-juno-green/20 focus:border-juno-green transition-all duration-200;
+  }
+
+  .label {
+    @apply block text-sm font-medium text-dark-700 mb-2;
+  }
+
+  .badge {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-medium;
+  }
+
+  .badge-green {
+    @apply badge bg-juno-light-green text-juno-dark-green;
+  }
+}
+
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}

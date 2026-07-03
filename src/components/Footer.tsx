@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { SIGNUP_URL } from '@/lib/config'
 
 export default function Footer() {
   return (

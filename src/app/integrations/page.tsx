@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import type { Metadata } from 'next'
+import { SIGNUP_URL } from '@/lib/config'
 
 export const metadata: Metadata = {
   title: 'Juno Integrations | AI Tax Prep That Fits Your Software',
@@ -69,7 +70,7 @@ export default function IntegrationsPage() {
               working alongside them without forcing you to rebuild your process.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <Link href="/start" className="btn btn-primary">Start Free Trial</Link>
+              <a href={SIGNUP_URL} className="btn btn-primary">Start Free Trial</a>
               <Link href="#demo" className="btn btn-secondary">Book a Demo</Link>
             </div>
           </div>
@@ -110,7 +111,7 @@ export default function IntegrationsPage() {
             <h2 className="heading-2 text-dark-900 mb-4">Not seeing your stack?</h2>
             <p className="text-body mx-auto mb-8">We're adding new integrations all the time. Let's talk.</p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <Link href="/start" className="btn btn-primary btn-lg">Start Free Trial</Link>
+              <a href={SIGNUP_URL} className="btn btn-primary btn-lg">Start Free Trial</a>
               <Link href="#demo" className="btn btn-secondary btn-lg">Book a Demo</Link>
             </div>
           </div>

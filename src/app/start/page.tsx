@@ -1,8 +1,17 @@
 'use client'
 
+import { useState } from 'react'
 import Link from 'next/link'
+import { SIGNIN_URL, SIGNUP_URL } from '@/lib/config'
 
 export default function StartPage() {
+  const [email, setEmail] = useState('')
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    window.location.href = `${SIGNUP_URL}?email=${encodeURIComponent(email)}`
+  }
+
   return (
     <main className="min-h-screen flex items-center justify-center bg-dark-50 px-6 py-12">
       <div className="w-full max-w-md">
@@ -17,30 +26,20 @@ export default function StartPage() {
           <p className="text-muted">7 days free. 5 free preparations. No credit card required.</p>
         </div>
         <div className="card p-8">
-          <form onSubmit={e => e.preventDefault()} className="space-y-5">
-            <div>
-              <label className="label">Full name</label>
-              <input type="text" className="input" placeholder="Your name" required />
-            </div>
+          <form onSubmit={handleSubmit} className="space-y-5">
             <div>
               <label className="label">Work email</label>
-              <input type="email" className="input" placeholder="you@firm.com" required />
+              <input type="email" className="input" placeholder="you@firm.com" value={email} onChange={e => setEmail(e.target.value)} required />
             </div>
-            <div>
-              <label className="label">Firm name</label>
-              <input type="text" className="input" placeholder="Your firm" />
-            </div>
-            <div>
-              <label className="label">Phone (optional)</label>
-              <input type="tel" className="input" placeholder="(555) 123-4567" />
-            </div>
-            <button type="submit" className="btn btn-primary w-full">Start Free Trial</button>
+            <button type="submit" className="btn btn-primary w-full">
+              Continue to Sign Up
+            </button>
           </form>
           <p className="text-center text-xs text-dark-500 mt-6">
             By signing up, you agree to our <Link href="#" className="underline">Terms</Link> and <Link href="#" className="underline">Privacy Policy</Link>.
           </p>
           <p className="text-center text-sm text-dark-500 mt-4">
-            Already have an account? <Link href="/signin" className="text-juno-dark-green hover:underline font-medium">Sign In</Link>
+            Already have an account? <a href={SIGNIN_URL} className="text-juno-dark-green hover:underline font-medium">Sign In</a>
           </p>
         </div>
       </div>

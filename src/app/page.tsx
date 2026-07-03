@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import ScrollReveal from '@/components/ScrollReveal'
+import { SIGNUP_URL } from '@/lib/config'
 
 export default function HomePage() {
   return (
@@ -25,7 +26,7 @@ export default function HomePage() {
                   saving firms millions.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3">
-                  <Link href="/start" className="btn btn-primary">Start Free Trial</Link>
+                  <a href={SIGNUP_URL} className="btn btn-primary">Start Free Trial</a>
                   <Link href="#demo" className="btn btn-secondary">Book a Demo</Link>
                 </div>
                 <p className="text-xs text-dark-400 mt-4">7-day free trial. 5 free returns. No credit card required.</p>
@@ -309,7 +310,7 @@ export default function HomePage() {
                 Join 1,000+ tax professionals saving time, increasing accuracy, and growing their practice with Juno.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link href="/start" className="inline-flex items-center justify-center px-8 py-4 rounded-lg bg-white text-juno-dark-green font-semibold text-lg hover:bg-juno-light-green transition-colors shadow-sm">Start Free Trial</Link>
+                <a href={SIGNUP_URL} className="inline-flex items-center justify-center px-8 py-4 rounded-lg bg-white text-juno-dark-green font-semibold text-lg hover:bg-juno-light-green transition-colors shadow-sm">Start Free Trial</a>
                 <Link href="#demo" className="inline-flex items-center justify-center px-8 py-4 rounded-lg border-2 border-white/30 text-white font-semibold text-lg hover:bg-white/10 transition-colors">Book a Demo</Link>
               </div>
               <p className="text-sm text-juno-light-green/60 mt-6">7-day free trial. Start 5 free preparations. No credit card required.</p>

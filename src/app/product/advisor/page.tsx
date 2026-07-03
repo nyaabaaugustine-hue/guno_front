@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import type { Metadata } from 'next'
+import { SIGNUP_URL } from '@/lib/config'
 
 export const metadata: Metadata = {
   title: 'AI Tax Advisor for Firms | Juno',
@@ -19,7 +20,7 @@ export default function AdvisorPage() {
               and regulatory updates. Built so you can focus on growing your practice.
             </p>
             <div className="flex flex-col sm:flex-row gap-3">
-              <Link href="/start" className="btn btn-primary">Start Free Trial</Link>
+              <a href={SIGNUP_URL} className="btn btn-primary">Start Free Trial</a>
               <Link href="#demo" className="btn btn-secondary">Book a Demo</Link>
             </div>
           </div>
@@ -82,7 +83,7 @@ export default function AdvisorPage() {
           <div className="text-center max-w-3xl mx-auto">
             <h2 className="heading-2 text-white mb-6">See how fast tax prep can be when Juno handles the grunt work.</h2>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/start" className="inline-flex items-center justify-center px-8 py-4 rounded-lg bg-white text-juno-dark-green font-semibold text-lg hover:bg-juno-light-green transition-colors shadow-sm">Start Free Trial</Link>
+              <a href={SIGNUP_URL} className="inline-flex items-center justify-center px-8 py-4 rounded-lg bg-white text-juno-dark-green font-semibold text-lg hover:bg-juno-light-green transition-colors shadow-sm">Start Free Trial</a>
               <Link href="#demo" className="inline-flex items-center justify-center px-8 py-4 rounded-lg border-2 border-white/30 text-white font-semibold text-lg hover:bg-white/10 transition-colors">Book a Demo</Link>
             </div>
           </div>

@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
+import { SIGNIN_URL, SIGNUP_URL } from '@/lib/config'
 
 const navItems = [
   {
@@ -95,18 +96,18 @@ export default function Header() {
           </nav>
 
           <div className="hidden lg:flex items-center gap-4">
-            <Link
-              href="/signin"
+            <a
+              href={SIGNIN_URL}
               className="text-sm font-medium text-dark-500 hover:text-dark-900 transition-colors"
             >
               Sign In
-            </Link>
-            <Link
-              href="/start"
+            </a>
+            <a
+              href={SIGNUP_URL}
               className="inline-flex items-center justify-center px-5 py-2.5 rounded-lg bg-juno-dark-green text-white text-sm font-semibold hover:bg-juno-mid-green transition-colors shadow-sm"
             >
               Start Free Trial
-            </Link>
+            </a>
           </div>
 
           <button
@@ -167,20 +168,20 @@ export default function Header() {
               )
             )}
             <div className="pt-4 space-y-2 border-t border-dark-100 mt-4">
-              <Link
-                href="/signin"
+              <a
+                href={SIGNIN_URL}
                 className="block px-3 py-2.5 text-sm text-dark-600 font-medium rounded-lg hover:bg-dark-50 transition-colors"
                 onClick={() => setMobileOpen(false)}
               >
                 Sign In
-              </Link>
-              <Link
-                href="/start"
+              </a>
+              <a
+                href={SIGNUP_URL}
                 className="block px-3 py-2.5 text-sm text-white font-semibold rounded-lg bg-juno-dark-green text-center"
                 onClick={() => setMobileOpen(false)}
               >
                 Start Free Trial
-              </Link>
+              </a>
             </div>
           </div>
         </div>

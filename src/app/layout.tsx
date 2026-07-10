@@ -59,7 +59,7 @@ export default function RootLayout({
       <head>
         <link rel="preconnect" href="https://juno.tax" />
         <link rel="dns-prefetch" href="https://juno.tax" />
-        <link rel="preload" href="/images/hero-preview.png" as="image" />
+        <link rel="preload" href="/images/hero-workspace.jpg" as="image" />
         <JsonLd />
       </head>
       <body className="min-h-screen flex flex-col pt-16 md:pt-20">

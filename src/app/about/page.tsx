@@ -36,8 +36,18 @@ export default function AboutPage() {
       </ScrollReveal>
 
       <ScrollReveal delay={0.1}>
-        <section className="section bg-white">
-          <div className="container px-6 md:px-12">
+        <section className="section bg-white relative overflow-hidden">
+          {/* Team collaboration photo as decorative background */}
+          <div className="absolute inset-0 lg:block hidden">
+            <Image
+              src="/images/team-collaboration.jpg"
+              alt=""
+              fill
+              className="object-cover opacity-[0.03]"
+              loading="lazy"
+            />
+          </div>
+          <div className="container px-6 md:px-12 relative">
             <div className="grid lg:grid-cols-5 gap-12 max-w-5xl mx-auto">
               <div className="lg:col-span-3">
                 <h2 className="heading-2 mb-8">I needed the perfect junior assistant: Juno.</h2>

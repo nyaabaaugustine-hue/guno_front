@@ -9,10 +9,21 @@ export default function HomePage() {
     <main>
       {/* Hero */}
       <section className="relative pt-24 pb-20 md:pt-32 md:pb-28 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-juno-green/[0.07] to-transparent"></div>
+        {/* Background image with overlay */}
+        <div className="absolute inset-0">
+          <Image
+            src="/images/hero-workspace.jpg"
+            alt=""
+            fill
+            className="object-cover"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-white/95 via-white/90 to-white/95"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-juno-green/[0.07] to-transparent"></div>
+        </div>
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute -top-40 -right-40 w-96 h-96 bg-juno-green/[0.04] rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-juno-dark-green/[0.03] rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
+          <div className="absolute -top-40 -right-40 w-96 h-96 bg-juno-green/[0.08] rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-juno-dark-green/[0.05] rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
         </div>
         <div className="container px-6 md:px-12 relative">
           <ScrollReveal>

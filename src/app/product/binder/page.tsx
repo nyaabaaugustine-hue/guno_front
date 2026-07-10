@@ -1,10 +1,20 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import type { Metadata } from 'next'
+import ScrollReveal from '@/components/ScrollReveal'
+import Breadcrumb from '@/components/Breadcrumb'
+import AnimatedFAQ from '@/components/AnimatedFAQ'
+import CtaBanner from '@/components/CtaBanner'
 import { SIGNUP_URL } from '@/lib/config'
 
 export const metadata: Metadata = {
   title: 'Automate Tax Workpaper Preparation for Tax Firms | Juno',
   description: 'Automate tax workpaper preparation with Binder. Build structured binders from client docs, annotate with tax-specific markup tools, and review as a team.',
+  openGraph: {
+    title: 'Automate Tax Workpaper Preparation | Juno Binder',
+    description: 'Build structured binders from client docs and review as a team.',
+    images: [{ url: '/images/og-default.png', width: 1200, height: 630 }],
+  },
 }
 
 export default function BinderPage() {
@@ -13,6 +23,7 @@ export default function BinderPage() {
       <section className="relative pt-24 pb-20 md:pt-32 md:pb-28 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-juno-green/[0.07] to-transparent"></div>
         <div className="container px-6 md:px-12">
+          <Breadcrumb items={[{ label: 'Product' }, { label: 'Binder' }]} />
           <div className="max-w-2xl">
             <div className="badge-green mb-5">Tax Workpaper Preparation</div>
             <h1 className="heading-1 text-dark-900 mb-6">Automate workpaper prep. Review together.</h1>
@@ -32,63 +43,49 @@ export default function BinderPage() {
         <div className="container px-6 md:px-12">
           <div className="flex flex-wrap justify-center gap-x-10 gap-y-5 items-center opacity-40">
             {['drake.png','intuit-lacerte.png','intuit-proconnect.png','cch-axcess.png','taxdome.png','quickbooks.png'].map(f => (
-              <img key={f} src={`/images/integrations/${f}`} alt="" className="h-6" />
+              <Image key={f} src={`/images/integrations/${f}`} alt="" width={100} height={24} className="h-6 w-auto" loading="lazy" />
             ))}
           </div>
         </div>
       </section>
 
-      <section className="section bg-white">
-        <div className="container px-6 md:px-12 max-w-5xl mx-auto">
-          <h2 className="heading-2 text-center mb-14">How Binder works</h2>
-          <div className="grid md:grid-cols-2 gap-6">
-            {[
-              { title: 'Builds a prep-ready binder automatically', desc: 'Automatically creates a clean, structured binder from all uploaded client documents organized in tax return order so preparers can get started right away.' },
-              { title: 'Includes tax-specific markup tools', desc: 'Tick marks, calculator tapes, references, sign-offs, and all the annotation tools tax pros use every day — built directly into the workflow.' },
-              { title: 'Annotate without leaving your workflow', desc: 'Review documents, add notes, and mark up PDFs without switching tools or juggling separate software.' },
-              { title: 'Supports real-time collaboration', desc: 'Your team can work on the same binder simultaneously, with changes reflected instantly. Assign tasks, track progress, and review together.' },
-            ].map(f => (
-              <div key={f.title} className="card card-hover p-7">
-                <h3 className="text-lg font-bold text-dark-900 mb-3">{f.title}</h3>
-                <p className="text-sm text-dark-600 leading-relaxed">{f.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section bg-dark-50">
-        <div className="container px-6 md:px-12 max-w-3xl mx-auto">
-          <h2 className="heading-2 text-center mb-12">Frequently asked questions</h2>
-          <div className="space-y-4">
-            {[
-              { q: 'How does Binder organize documents?', a: 'Binder automatically organizes documents in tax return order, creating a clean structured workpaper from all uploaded client documents.' },
-              { q: 'Can my team collaborate in real-time?', a: 'Yes. Multiple team members can work on the same binder simultaneously with changes reflected instantly.' },
-              { q: 'What markup tools are available?', a: 'Tick marks, calculator tapes, references, sign-offs, and all standard tax annotation tools are built directly into the workflow.' },
-            ].map(faq => (
-              <details key={faq.q} className="card card-hover p-5 group">
-                <summary className="font-semibold text-dark-900 cursor-pointer list-none flex justify-between items-center text-sm">
-                  {faq.q}
-                  <svg className="w-4 h-4 text-dark-400 group-open:rotate-180 transition-transform shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
-                </summary>
-                <p className="text-sm text-dark-600 mt-3 leading-relaxed">{faq.a}</p>
-              </details>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section bg-juno-dark-green">
-        <div className="container px-6 md:px-12">
-          <div className="text-center max-w-3xl mx-auto">
-            <h2 className="heading-2 text-white mb-6">See how fast tax prep can be when Juno handles the grunt work.</h2>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href={SIGNUP_URL} className="inline-flex items-center justify-center px-8 py-4 rounded-lg bg-white text-juno-dark-green font-semibold text-lg hover:bg-juno-light-green transition-colors shadow-sm">Start Free Trial</a>
-              <Link href="#demo" className="inline-flex items-center justify-center px-8 py-4 rounded-lg border-2 border-white/30 text-white font-semibold text-lg hover:bg-white/10 transition-colors">Book a Demo</Link>
+      <ScrollReveal>
+        <section className="section bg-white">
+          <div className="container px-6 md:px-12 max-w-5xl mx-auto">
+            <h2 className="heading-2 text-center mb-14">How Binder works</h2>
+            <div className="grid md:grid-cols-2 gap-6">
+              {[
+                { title: 'Builds a prep-ready binder automatically', desc: 'Automatically creates a clean, structured binder from all uploaded client documents organized in tax return order so preparers can get started right away.' },
+                { title: 'Includes tax-specific markup tools', desc: 'Tick marks, calculator tapes, references, sign-offs, and all the annotation tools tax pros use every day — built directly into the workflow.' },
+                { title: 'Annotate without leaving your workflow', desc: 'Review documents, add notes, and mark up PDFs without switching tools or juggling separate software.' },
+                { title: 'Supports real-time collaboration', desc: 'Your team can work on the same binder simultaneously, with changes reflected instantly. Assign tasks, track progress, and review together.' },
+              ].map((f, i) => (
+                <div key={f.title} className="card p-7 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300" style={{ transitionDelay: `${i * 50}ms` }}>
+                  <h3 className="text-lg font-bold text-dark-900 mb-3">{f.title}</h3>
+                  <p className="text-sm text-dark-600 leading-relaxed">{f.desc}</p>
+                </div>
+              ))}
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </ScrollReveal>
+
+      <ScrollReveal delay={0.1}>
+        <section className="section bg-dark-50">
+          <div className="container px-6 md:px-12 max-w-3xl mx-auto">
+            <h2 className="heading-2 text-center mb-12">Frequently asked questions</h2>
+            <AnimatedFAQ
+              items={[
+                { q: 'How does Binder organize documents?', a: 'Binder automatically organizes documents in tax return order, creating a clean structured workpaper from all uploaded client documents.' },
+                { q: 'Can my team collaborate in real-time?', a: 'Yes. Multiple team members can work on the same binder simultaneously with changes reflected instantly.' },
+                { q: 'What markup tools are available?', a: 'Tick marks, calculator tapes, references, sign-offs, and all standard tax annotation tools are built directly into the workflow.' },
+              ]}
+            />
+          </div>
+        </section>
+      </ScrollReveal>
+
+      <CtaBanner />
     </main>
   )
 }

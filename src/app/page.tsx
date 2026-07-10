@@ -1,5 +1,7 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import ScrollReveal from '@/components/ScrollReveal'
+import CtaBanner from '@/components/CtaBanner'
 import { SIGNUP_URL } from '@/lib/config'
 
 export default function HomePage() {
@@ -88,7 +90,14 @@ export default function HomePage() {
                 { file: 'quickbooks.png', label: 'QuickBooks' },
                 { file: 'xero.png', label: 'Xero' },
               ].map(l => (
-                <img key={l.file} src={`/images/integrations/${l.file}`} alt={l.label} className="h-7 opacity-50 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-300" />
+                <Image
+                  key={l.file}
+                  src={`/images/integrations/${l.file}`}
+                  alt={`${l.label} integration`}
+                  width={100}
+                  height={28}
+                  className="h-7 w-auto opacity-50 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-300"
+                />
               ))}
             </div>
           </div>
@@ -121,7 +130,14 @@ export default function HomePage() {
                 </Link>
               </div>
               <div className="bg-dark-50 rounded-xl border border-dark-100 p-8">
-                <img src="/images/cards/card-1.png" alt="Preparer interface" className="w-full rounded-lg shadow-sm" />
+                <Image
+                  src="/images/cards/card-1.png"
+                  alt="Preparer interface showing document extraction"
+                  width={540}
+                  height={360}
+                  className="w-full rounded-lg shadow-sm"
+                  loading="lazy"
+                />
               </div>
             </div>
           </div>
@@ -135,7 +151,14 @@ export default function HomePage() {
             <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
               <div className="order-last lg:order-first">
                 <div className="bg-white rounded-xl border border-dark-100 p-8">
-                  <img src="/images/cards/card-3.png" alt="Reviewer interface" className="w-full rounded-lg shadow-sm" />
+                  <Image
+                    src="/images/cards/card-3.png"
+                    alt="Reviewer interface showing side-by-side comparison"
+                    width={540}
+                    height={360}
+                    className="w-full rounded-lg shadow-sm"
+                    loading="lazy"
+                  />
                 </div>
               </div>
               <div className="order-first lg:order-last">
@@ -220,7 +243,15 @@ export default function HomePage() {
             </div>
             <div className="flex flex-wrap justify-center gap-8 items-center">
               {['drake-logo.png','lacerte-logo.png','proconnect-logo.png','cch-axcess-logo.png','taxdome.png','quickbooks.png','xero.png','karbon.png'].map(f => (
-                <img key={f} src={`/images/integrations/${f}`} alt="" className="h-8 opacity-40 grayscale hover:opacity-70 hover:grayscale-0 transition-all duration-300" />
+                <Image
+                  key={f}
+                  src={`/images/integrations/${f}`}
+                  alt=""
+                  width={100}
+                  height={32}
+                  className="h-8 w-auto opacity-40 grayscale hover:opacity-70 hover:grayscale-0 transition-all duration-300"
+                  loading="lazy"
+                />
               ))}
             </div>
             <div className="text-center mt-10">
@@ -245,7 +276,14 @@ export default function HomePage() {
                 <div key={t.name} className="border border-dark-100 rounded-xl p-7 flex flex-col justify-between transition-all duration-300 hover:shadow-md hover:-translate-y-0.5">
                   <p className="text-dark-700 text-sm leading-relaxed mb-6">&ldquo;{t.quote}&rdquo;</p>
                   <div className="flex items-center gap-3">
-                    <img src={`/images/team/${t.img}`} alt={t.name} className="w-10 h-10 rounded-full object-cover" />
+                    <Image
+                      src={`/images/team/${t.img}`}
+                      alt={`${t.name}, ${t.role}`}
+                      width={40}
+                      height={40}
+                      className="w-10 h-10 rounded-full object-cover"
+                      loading="lazy"
+                    />
                     <div>
                       <p className="font-semibold text-dark-900 text-sm">{t.name}</p>
                       <p className="text-xs text-dark-500">{t.role}</p>
@@ -301,23 +339,7 @@ export default function HomePage() {
       </ScrollReveal>
 
       {/* CTA */}
-      <ScrollReveal>
-        <section className="section bg-juno-dark-green">
-          <div className="container px-6 md:px-12">
-            <div className="text-center max-w-3xl mx-auto">
-              <h2 className="heading-2 text-white mb-6">Ready to transform your tax practice?</h2>
-              <p className="text-lg text-juno-light-green/80 mb-8 max-w-xl mx-auto">
-                Join 1,000+ tax professionals saving time, increasing accuracy, and growing their practice with Juno.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href={SIGNUP_URL} className="inline-flex items-center justify-center px-8 py-4 rounded-lg bg-white text-juno-dark-green font-semibold text-lg hover:bg-juno-light-green transition-colors shadow-sm">Start Free Trial</a>
-                <Link href="#demo" className="inline-flex items-center justify-center px-8 py-4 rounded-lg border-2 border-white/30 text-white font-semibold text-lg hover:bg-white/10 transition-colors">Book a Demo</Link>
-              </div>
-              <p className="text-sm text-juno-light-green/60 mt-6">7-day free trial. Start 5 free preparations. No credit card required.</p>
-            </div>
-          </div>
-        </section>
-      </ScrollReveal>
+      <CtaBanner />
     </main>
   )
 }

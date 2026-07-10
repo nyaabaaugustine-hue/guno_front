@@ -1,15 +1,21 @@
 'use client'
 
-import { useEffect, useState, useCallback } from 'react'
+import { useEffect, useState, useCallback, useRef } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
+import { DEMO_API } from '@/lib/config'
 
 export default function DemoModal() {
   const [open, setOpen] = useState(false)
   const [submitted, setSubmitted] = useState(false)
+  const [error, setError] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const formRef = useRef<HTMLFormElement>(null)
 
   const close = useCallback(() => {
     setOpen(false)
     setSubmitted(false)
+    setError(false)
+    setLoading(false)
     window.history.replaceState(null, '', window.location.pathname)
   }, [])
 
@@ -33,6 +39,35 @@ export default function DemoModal() {
     return () => { document.body.style.overflow = '' }
   }, [open])
 
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setLoading(true)
+    setError(false)
+
+    const form = new FormData(e.currentTarget)
+    const data = {
+      firstName: form.get('firstName'),
+      lastName: form.get('lastName'),
+      email: form.get('email'),
+      firm: form.get('firm'),
+      returns: form.get('returns'),
+    }
+
+    try {
+      const res = await fetch(DEMO_API, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      })
+      if (!res.ok) throw new Error('Failed to submit')
+      setSubmitted(true)
+    } catch {
+      setError(true)
+    } finally {
+      setLoading(false)
+    }
+  }
+
   return (
     <AnimatePresence>
       {open && (
@@ -42,6 +77,9 @@ export default function DemoModal() {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.2 }}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Book a demo"
         >
           <div className="absolute inset-0 bg-dark-900/50 backdrop-blur-sm" onClick={close} />
           <motion.div
@@ -53,14 +91,19 @@ export default function DemoModal() {
           >
             <div className="flex items-center justify-between px-6 py-4 border-b border-dark-100">
               <h2 className="text-lg font-semibold text-dark-900">Book a Demo</h2>
-              <button onClick={close} className="p-1 text-dark-400 hover:text-dark-900 transition-colors" aria-label="Close">
+              <button onClick={close} className="p-1 text-dark-400 hover:text-dark-900 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-juno-green/50 rounded" aria-label="Close dialog">
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </button>
             </div>
             {submitted ? (
-              <div className="p-8 text-center">
+              <motion.div
+                className="p-8 text-center"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3 }}
+              >
                 <div className="w-12 h-12 bg-juno-light-green rounded-full flex items-center justify-center mx-auto mb-4">
                   <svg className="w-6 h-6 text-juno-dark-green" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
@@ -68,33 +111,35 @@ export default function DemoModal() {
                 </div>
                 <h3 className="text-lg font-semibold text-dark-900 mb-2">Thanks for your interest!</h3>
                 <p className="text-sm text-dark-500">We&apos;ll be in touch within 24 hours to schedule your demo.</p>
-              </div>
+              </motion.div>
             ) : (
               <form
-                onSubmit={(e) => { e.preventDefault(); setSubmitted(true) }}
+                ref={formRef}
+                onSubmit={handleSubmit}
                 className="p-6 space-y-4"
+                noValidate
               >
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="label">First name</label>
-                    <input type="text" className="input" placeholder="Jane" required />
+                    <label htmlFor="demo-firstName" className="label">First name</label>
+                    <input id="demo-firstName" name="firstName" type="text" className="input" placeholder="Jane" required aria-required="true" />
                   </div>
                   <div>
-                    <label className="label">Last name</label>
-                    <input type="text" className="input" placeholder="Doe" required />
+                    <label htmlFor="demo-lastName" className="label">Last name</label>
+                    <input id="demo-lastName" name="lastName" type="text" className="input" placeholder="Doe" required aria-required="true" />
                   </div>
                 </div>
                 <div>
-                  <label className="label">Work email</label>
-                  <input type="email" className="input" placeholder="jane@firm.com" required />
+                  <label htmlFor="demo-email" className="label">Work email</label>
+                  <input id="demo-email" name="email" type="email" className="input" placeholder="jane@firm.com" required aria-required="true" />
                 </div>
                 <div>
-                  <label className="label">Firm name</label>
-                  <input type="text" className="input" placeholder="Your firm" required />
+                  <label htmlFor="demo-firm" className="label">Firm name</label>
+                  <input id="demo-firm" name="firm" type="text" className="input" placeholder="Your firm" required aria-required="true" />
                 </div>
                 <div>
-                  <label className="label">How many returns do you prepare per year?</label>
-                  <select className="input" required>
+                  <label htmlFor="demo-returns" className="label">How many returns do you prepare per year?</label>
+                  <select id="demo-returns" name="returns" className="input" required aria-required="true">
                     <option value="">Select...</option>
                     <option value="1-100">1–100</option>
                     <option value="101-500">101–500</option>
@@ -102,7 +147,21 @@ export default function DemoModal() {
                     <option value="2000+">2,000+</option>
                   </select>
                 </div>
-                <button type="submit" className="btn btn-primary w-full">Request Demo</button>
+                {error && (
+                  <p className="text-sm text-red-600 bg-red-50 p-3 rounded-lg" role="alert">
+                    Something went wrong. Please try again.
+                  </p>
+                )}
+                <button type="submit" disabled={loading} className="btn btn-primary w-full">
+                  {loading ? (
+                    <span className="flex items-center gap-2">
+                      <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                      Submitting...
+                    </span>
+                  ) : (
+                    'Request Demo'
+                  )}
+                </button>
                 <p className="text-xs text-dark-400 text-center">No commitment required. We&apos;ll show you what Juno can do for your firm.</p>
               </form>
             )}

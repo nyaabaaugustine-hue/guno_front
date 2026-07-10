@@ -4,12 +4,15 @@ import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import BackToTop from '@/components/BackToTop'
 import DemoModal from '@/components/DemoModal'
+import JsonLd from '@/components/JsonLd'
+import Analytics from '@/components/Analytics'
 import './globals.css'
 
 const outfit = Outfit({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-outfit',
+  preload: true,
 })
 
 export const metadata: Metadata = {
@@ -33,6 +36,7 @@ export const metadata: Metadata = {
     title: 'Juno Tax - AI-Powered Tax Preparation',
     description: 'Automate tax prep with AI. Trusted by 1000+ firms.',
   },
+  metadataBase: new URL('https://juno.tax'),
   verification: {
     google: 'google-site-verification-code',
   },
@@ -55,6 +59,8 @@ export default function RootLayout({
       <head>
         <link rel="preconnect" href="https://juno.tax" />
         <link rel="dns-prefetch" href="https://juno.tax" />
+        <link rel="preload" href="/images/hero-preview.png" as="image" />
+        <JsonLd />
       </head>
       <body className="min-h-screen flex flex-col pt-16 md:pt-20">
         <Header />
@@ -62,6 +68,7 @@ export default function RootLayout({
         <Footer />
         <BackToTop />
         <DemoModal />
+        <Analytics />
       </body>
     </html>
   )

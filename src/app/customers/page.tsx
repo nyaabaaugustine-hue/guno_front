@@ -1,10 +1,18 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import type { Metadata } from 'next'
+import ScrollReveal from '@/components/ScrollReveal'
+import CtaBanner from '@/components/CtaBanner'
 import { SIGNUP_URL } from '@/lib/config'
 
 export const metadata: Metadata = {
   title: 'How Firms Use AI Tax Prep | Juno Customers',
   description: 'See how accounting firms use AI tax prep to streamline preparation and review while maintaining quality and control.',
+  openGraph: {
+    title: 'How Firms Use AI Tax Prep | Juno Customers',
+    description: 'See how accounting firms use AI tax prep to streamline preparation and review.',
+    images: [{ url: '/images/og-default.png', width: 1200, height: 630 }],
+  },
 }
 
 const testimonials = [
@@ -42,56 +50,56 @@ export default function CustomersPage() {
         </div>
       </section>
 
-      <section className="section bg-white">
-        <div className="container px-6 md:px-12">
-          <h2 className="heading-2 text-center mb-14">What tax pros are saying</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {testimonials.map(t => (
-              <div key={t.name} className="card card-hover p-7 flex flex-col justify-between">
-                <p className="text-dark-700 text-sm leading-relaxed mb-6">"{t.quote}"</p>
-                <div className="flex items-center gap-3">
-                  <img src={`/images/team/${t.img}`} alt={t.name} className="w-10 h-10 rounded-full object-cover" />
-                  <div>
-                    <p className="font-semibold text-dark-900 text-sm">{t.name}</p>
-                    <p className="text-xs text-dark-500">{t.role}</p>
+      <ScrollReveal>
+        <section className="section bg-white">
+          <div className="container px-6 md:px-12">
+            <h2 className="heading-2 text-center mb-14">What tax pros are saying</h2>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {testimonials.map(t => (
+                <div key={t.name} className="card p-7 flex flex-col justify-between hover:shadow-md hover:-translate-y-0.5 transition-all duration-300">
+                  <p className="text-dark-700 text-sm leading-relaxed mb-6">&ldquo;{t.quote}&rdquo;</p>
+                  <div className="flex items-center gap-3">
+                    <Image
+                      src={`/images/team/${t.img}`}
+                      alt={`${t.name}, ${t.role}`}
+                      width={40}
+                      height={40}
+                      className="w-10 h-10 rounded-full object-cover"
+                      loading="lazy"
+                    />
+                    <div>
+                      <p className="font-semibold text-dark-900 text-sm">{t.name}</p>
+                      <p className="text-xs text-dark-500">{t.role}</p>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section bg-dark-50">
-        <div className="container px-6 md:px-12">
-          <h2 className="heading-2 text-center mb-4">How firms are putting Juno to work</h2>
-          <p className="text-body text-center mx-auto max-w-xl mb-14">
-            Hours back on every return, cleaner handoffs, and new capacity without new hires.
-          </p>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {caseStudies.map(cs => (
-              <div key={cs.title} className="card card-hover p-7">
-                <h3 className="text-base font-bold text-dark-900 mb-2">{cs.title}</h3>
-                <p className="text-sm text-dark-600 mb-5">{cs.desc}</p>
-                <Link href="#" className="text-juno-dark-green font-semibold text-sm hover:underline">Read the story →</Link>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section bg-juno-dark-green">
-        <div className="container px-6 md:px-12">
-          <div className="text-center max-w-3xl mx-auto">
-            <h2 className="heading-2 text-white mb-6">See how fast tax prep can be when Juno handles the grunt work.</h2>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href={SIGNUP_URL} className="inline-flex items-center justify-center px-8 py-4 rounded-lg bg-white text-juno-dark-green font-semibold text-lg hover:bg-juno-light-green transition-colors shadow-sm">Start Free Trial</a>
-              <Link href="#demo" className="inline-flex items-center justify-center px-8 py-4 rounded-lg border-2 border-white/30 text-white font-semibold text-lg hover:bg-white/10 transition-colors">Book a Demo</Link>
+              ))}
             </div>
-            <p className="text-sm text-juno-light-green/60 mt-6">7-day free trial. Start 5 free preparations. No credit card required.</p>
           </div>
-        </div>
-      </section>
+        </section>
+      </ScrollReveal>
+
+      <ScrollReveal delay={0.1}>
+        <section className="section bg-dark-50">
+          <div className="container px-6 md:px-12">
+            <h2 className="heading-2 text-center mb-4">How firms are putting Juno to work</h2>
+            <p className="text-body text-center mx-auto max-w-xl mb-14">
+              Hours back on every return, cleaner handoffs, and new capacity without new hires.
+            </p>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {caseStudies.map((cs, i) => (
+                <div key={cs.title} className="card p-7 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300" style={{ transitionDelay: `${i * 50}ms` }}>
+                  <h3 className="text-base font-bold text-dark-900 mb-2">{cs.title}</h3>
+                  <p className="text-sm text-dark-600 mb-5">{cs.desc}</p>
+                  <Link href="#" className="text-juno-dark-green font-semibold text-sm hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-juno-green/50 rounded">Read the story →</Link>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      </ScrollReveal>
+
+      <CtaBanner />
     </main>
   )
 }
